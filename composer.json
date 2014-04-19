@@ -1,7 +1,8 @@
 {
     "name": "da-eto-ya/behat-spawner-extension",
-    "description": "Spawns processes when Behat events occurs",
-    "minimum-stability": "stable",
+    "description": "Spawns processes when Behat starts",
+    "keywords": ["behat", "spawner", "process", "extension"],
+    "homepage": "https://github.com/da-eto-ya/behat-spawner-extension",
     "license": "MIT",
     "authors": [
         {
@@ -10,8 +11,10 @@
         }
     ],
 
+    "minimum-stability": "stable",
+
     "require": {
-        "php": ">=5.3.0",
+        "php": ">=5.3.4",
         "behat/behat": "~2.5",
         "symfony/process": ">=2.3.12"
     },
@@ -22,7 +25,7 @@
 
     "autoload": {
         "psr-0": {
-            "DaEtoYa\\SpawnerExtension": "src/"
+            "DaEtoYa\\Behat\\SpawnerExtension": "src/"
         }
     },
 
