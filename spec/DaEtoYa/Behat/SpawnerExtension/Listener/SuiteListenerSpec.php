@@ -64,15 +64,6 @@ class SuiteListenerSpec extends ObjectBehavior
         $this->stopProcesses()->shouldBe(null);
     }
 
-    function it_should_create_processes_one_on_each_command()
-    {
-        $commands = array(array("php", "-v"), array("php", "-v"));
-
-        $this->beConstructedWith($commands, null);
-        $this->createProcesses();
-        $this->getProcesses()->shouldHaveCount(count($commands));
-    }
-
     function it_should_store_processes_between_spawn_and_stop_and_clear_after()
     {
         $commands = array(array("php", "-v"), array("php", "-v"));

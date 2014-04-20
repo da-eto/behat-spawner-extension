@@ -95,18 +95,6 @@ class SuiteListener implements EventSubscriberInterface
      */
     public function spawnProcesses()
     {
-        $this->createProcesses();
-
-        foreach ($this->processes as $process) {
-            $process->start();
-        }
-    }
-
-    /**
-     * Creates processes for commands
-     */
-    public function createProcesses()
-    {
         if (!count($this->processes)) {
             $workingDirectory = $this->workingDirectory ? $this->workingDirectory : ".";
             $execPrefix = defined('PHP_WINDOWS_VERSION_BUILD') ? $this->winPrefix : $this->nixPrefix;
@@ -121,6 +109,7 @@ class SuiteListener implements EventSubscriberInterface
                 }
 
                 $process = $builder->getProcess();
+                $process->start();
                 $this->processes[] = $process;
             }
         }
