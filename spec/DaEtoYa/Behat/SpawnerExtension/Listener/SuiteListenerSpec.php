@@ -70,8 +70,10 @@ class SuiteListenerSpec extends ObjectBehavior
 
         $this->beConstructedWith($commands, null);
         $this->getProcesses()->shouldHaveCount(0);
+
         $this->spawnProcesses();
         $this->getProcesses()->shouldHaveCount(count($commands));
+
         $this->stopProcesses();
         $this->getProcesses()->shouldHaveCount(0);
     }
