@@ -115,7 +115,7 @@ class SuiteListener implements EventSubscriberInterface
             }
         }
 
-        if ($this->sleep) {
+        if ($this->sleep && count($this->processes)) {
             usleep(1000 * $this->sleep);
         }
     }
