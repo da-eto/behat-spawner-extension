@@ -24,6 +24,16 @@ class Extension implements ExtensionInterface
         );
 
         $loader->load('services.yml');
+
+        $config['commands'] = isset($config['commands']) ? $config['commands'] : array();
+        $config['work_dir'] = isset($config['work_dir']) ? $config['work_dir'] : null;
+        $config['nix_prefix'] = isset($config['nix_prefix']) ? $config['nix_prefix'] : 'exec';
+        $config['win_prefix'] = isset($config['win_prefix']) ? $config['win_prefix'] : '';
+
+        $container->setParameter('behat.spawner.commands', $config['commands']);
+        $container->setParameter('behat.spawner.working_directory', $config['work_dir']);
+        $container->setParameter('behat.spawner.nix_prefix', $config['nix_prefix']);
+        $container->setParameter('behat.spawner.win_prefix', $config['win_prefix']);
     }
 
     /**
@@ -33,6 +43,23 @@ class Extension implements ExtensionInterface
      */
     public function getConfig(ArrayNodeDefinition $builder)
     {
+        $builder
+            ->children()
+                ->arrayNode('commands')
+                    ->addDefaultsIfNotSet()
+                    ->prototype('array')->end()
+                    ->defaultValue(array())
+                ->end()
+                ->scalarNode('win_prefix')
+                    ->defaultValue('')
+                ->end()
+                ->scalarNode('work_dir')
+                    ->defaultNull()
+                ->end()
+                ->scalarNode('nix_prefix')
+                    ->defaultValue('exec')
+                ->end()
+            ->end();
     }
 
     /**

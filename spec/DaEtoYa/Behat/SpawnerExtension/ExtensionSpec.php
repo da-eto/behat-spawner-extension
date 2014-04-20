@@ -24,11 +24,6 @@ class ExtensionSpec extends ObjectBehavior
         $this->getCompilerPasses()->shouldHaveCount(0);
     }
 
-    function it_is_configurable(ArrayNodeDefinition $builder)
-    {
-        $this->getConfig($builder)->shouldBe(null);
-    }
-
     function it_is_loadable(ContainerBuilder $container)
     {
         $this->load(array(), $container)->shouldBe(null);
