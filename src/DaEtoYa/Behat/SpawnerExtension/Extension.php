@@ -45,7 +45,7 @@ class Extension implements ExtensionInterface
     {
         $builder
             ->children()
-                ->arrayNode('commands')
+                ->variableNode('commands')
                     ->prototype('array')->end()
                 ->end()
                 ->scalarNode('win_prefix')
