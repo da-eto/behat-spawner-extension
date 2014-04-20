@@ -13,29 +13,28 @@ machine, CI-server, etc) without need for bash/cmd script to run testing suite.
 Installation
 ------------
 
-1. Define dependencies in your `composer.json`:
+Define dependencies in your `composer.json`:
 
 ``` javascript
 {
     "require": {
         ...
-
-            "da-eto-ya/behat-spawner-extension": "dev-master"
+        "da-eto-ya/behat-spawner-extension": "dev-master"
     }
 }
 ```
 
-2. Install/update your vendors:
+Install/update your vendors:
 
 ``` bash
-    $ curl http://getcomposer.org/installer | php
-    $ php composer.phar install
+$ curl http://getcomposer.org/installer | php
+$ php composer.phar install
 ```
 
 Or if you have composer installed global-wise on machine, you can use it:
 
 ``` bash
-    $ composer install
+$ composer install
 ```
 
 Configure
@@ -44,18 +43,18 @@ Configure
 Activate and configure extension in your `behat.yml`:
 
 ``` yaml
-    # behat.yml
-    default:
-        # ...
-        extensions:
-            DaEtoYa\Behat\SpawnerExtension\Extension:
-                commands:           # array-formatted command list
-                    - [php, -S, localhost:8880, -t, web, web/index.php]
-                    - ['./bin/phantomjs', '--webdriver=8643']
-                work_dir: ''        # by default, use current directory
-                win_prefix: ''      # prefix commands on Windows (default: empty)
-                nix_prefix: 'exec'  # prefix commands on *-nix (default: 'exec')
-                sleep: 0            # sleep after spawn (in milliseconds, default 0)
+# behat.yml
+default:
+    # ...
+    extensions:
+        DaEtoYa\Behat\SpawnerExtension\Extension:
+            commands:           # array-formatted command list
+                - [php, -S, localhost:8880, -t, web, web/index.php]
+                - ['./bin/phantomjs', '--webdriver=8643']
+            work_dir: ''        # by default, use current directory
+            win_prefix: ''      # prefix commands on Windows (default: empty)
+            nix_prefix: 'exec'  # prefix commands on *-nix (default: 'exec')
+            sleep: 0            # sleep after spawn (in milliseconds, default 0)
 ```
 
 All settings are optional. `commands` option if general for use this extension.
