@@ -44,6 +44,14 @@ class SuiteListenerSpec extends ObjectBehavior
         $this->getWorkingDirectory()->shouldBe($workingDirectory);
     }
 
+    function it_assign_sleep_time_on_construct()
+    {
+        $sleep = 10;
+
+        $this->beConstructedWith(array(), null, "", "", $sleep);
+        $this->getSleep()->shouldBe($sleep);
+    }
+
     function it_assign_prefixes_on_construct()
     {
         $winPrefix = "win";

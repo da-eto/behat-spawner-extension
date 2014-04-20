@@ -6,5 +6,6 @@ services:
             - %behat.spawner.working_directory%
             - '%behat.spawner.nix_prefix%'
             - '%behat.spawner.win_prefix%'
+            - '%behat.spawner.sleep%'
         tags:
             - { name: behat.event_subscriber }

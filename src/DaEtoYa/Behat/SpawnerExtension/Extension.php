@@ -29,11 +29,13 @@ class Extension implements ExtensionInterface
         $config['work_dir'] = isset($config['work_dir']) ? $config['work_dir'] : null;
         $config['nix_prefix'] = isset($config['nix_prefix']) ? $config['nix_prefix'] : 'exec';
         $config['win_prefix'] = isset($config['win_prefix']) ? $config['win_prefix'] : '';
+        $config['sleep'] = isset($config['sleep']) ? $config['sleep'] : 0;
 
         $container->setParameter('behat.spawner.commands', $config['commands']);
         $container->setParameter('behat.spawner.working_directory', $config['work_dir']);
         $container->setParameter('behat.spawner.nix_prefix', $config['nix_prefix']);
         $container->setParameter('behat.spawner.win_prefix', $config['win_prefix']);
+        $container->setParameter('behat.spawner.sleep', $config['sleep']);
     }
 
     /**
@@ -55,6 +57,9 @@ class Extension implements ExtensionInterface
                 ->end()
                 ->scalarNode('nix_prefix')
                     ->defaultValue('exec')
+                ->end()
+                ->integerNode('sleep')
+                    ->defaultValue(0)
                 ->end()
             ->end();
     }
