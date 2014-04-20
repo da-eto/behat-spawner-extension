@@ -4,7 +4,9 @@ namespace DaEtoYa\Behat\SpawnerExtension;
 
 use Behat\Behat\Extension\ExtensionInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
 class Extension implements ExtensionInterface
 {
@@ -16,7 +18,12 @@ class Extension implements ExtensionInterface
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        // TODO: Implement load() method.
+        $loader = new YamlFileLoader(
+            $container,
+            new FileLocator(__DIR__ . DIRECTORY_SEPARATOR . 'services')
+        );
+
+        $loader->load('services.yml');
     }
 
     /**
