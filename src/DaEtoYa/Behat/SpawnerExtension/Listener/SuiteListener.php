@@ -96,7 +96,7 @@ class SuiteListener implements EventSubscriberInterface
     public function spawnProcesses()
     {
         if (!count($this->processes)) {
-            $workingDirectory = $this->workingDirectory ? $this->workingDirectory : ".";
+            $workingDirectory = $this->workingDirectory ? $this->workingDirectory : "";
             $execPrefix = defined('PHP_WINDOWS_VERSION_BUILD') ? $this->winPrefix : $this->nixPrefix;
 
             foreach ($this->commands as $arguments) {
