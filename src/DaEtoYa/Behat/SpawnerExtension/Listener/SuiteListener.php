@@ -100,31 +100,19 @@ class SuiteListener implements EventSubscriberInterface
             $execPrefix = defined('PHP_WINDOWS_VERSION_BUILD') ? $this->winPrefix : $this->nixPrefix;
 
             foreach ($this->commands as $arguments) {
-                $process = $this->createProcess($workingDirectory, $execPrefix, $arguments);
+                $builder = new ProcessBuilder();
+                $builder->setWorkingDirectory($workingDirectory);
+                $builder->setPrefix($execPrefix);
+
+                foreach ($arguments as $arg) {
+                    $builder->add($arg);
+                }
+
+                $process = $builder->getProcess();
                 $process->start();
                 $this->processes[] = $process;
             }
         }
-    }
-
-    /**
-     * @param string|null $workingDirectory
-     * @param string      $execPrefix
-     * @param array       $arguments
-     *
-     * @return \Symfony\Component\Process\Process
-     */
-    private function createProcess($workingDirectory, $execPrefix, $arguments)
-    {
-        $builder = new ProcessBuilder();
-        $builder->setWorkingDirectory($workingDirectory);
-        $builder->setPrefix($execPrefix);
-
-        foreach ($arguments as $arg) {
-            $builder->add($arg);
-        }
-
-        return $builder->getProcess();
     }
 
     /**
