@@ -124,8 +124,7 @@ class SuiteListener implements EventSubscriberInterface
             $builder->add($arg);
         }
 
-        $process = $builder->getProcess();
-        return $process;
+        return $builder->getProcess();
     }
 
     /**
