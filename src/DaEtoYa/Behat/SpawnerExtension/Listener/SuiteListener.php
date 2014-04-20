@@ -159,4 +159,12 @@ class SuiteListener implements EventSubscriberInterface
     {
         return $this->processes;
     }
+
+    /**
+     * @return int
+     */
+    public function getSleep()
+    {
+        return $this->sleep;
+    }
 }

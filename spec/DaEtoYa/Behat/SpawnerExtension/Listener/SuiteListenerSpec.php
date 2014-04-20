@@ -7,11 +7,6 @@ use Prophecy\Argument;
 
 class SuiteListenerSpec extends ObjectBehavior
 {
-    function let()
-    {
-        $this->beConstructedWith(array(), null, "", "");
-    }
-
     function it_is_initializable()
     {
         $this->shouldHaveType('DaEtoYa\Behat\SpawnerExtension\Listener\SuiteListener');
