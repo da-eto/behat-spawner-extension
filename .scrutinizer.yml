@@ -1,18 +1,25 @@
+filter:
+    excluded_paths: [vendor/*, bin/*, spec/*]
+before_commands:
+    - 'composer install --dev --prefer-source'
 tools:
-    php_cs_fixer:
-        filter:
-            excluded_paths: ["spec/*"]
     php_code_sniffer:
-        filter:
-            excluded_paths: ["spec/*"]
+        enabled: true
         config:
-            standard: PSR1, PSR2
+            standard: PSR2
     php_mess_detector:
+        enabled: true
         filter:
-            excluded_paths: ["spec/*"]
+            excluded_paths: [vendor/*, bin/*, spec/*]
+    php_pdepend: true
+    php_cpd:
+        enabled: true
+        excluded_dirs: [vendor, bin, spec]
+    php_sim: true
     php_analyzer:
+        enabled: true
         filter:
-            excluded_paths: ["spec/*"]
+            excluded_paths: [vendor/*, bin/*, spec/*]
     sensiolabs_security_checker: true
-    php_loc:
-        excluded_dirs: []
+    php_changetracking: true
+    php_hhvm: true
