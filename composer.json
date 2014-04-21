@@ -1,6 +1,7 @@
 {
     "name": "da-eto-ya/behat-spawner-extension",
     "description": "Spawns processes when Behat starts",
+    "type": "library",
     "keywords": ["behat", "spawner", "process", "extension"],
     "homepage": "https://github.com/da-eto-ya/behat-spawner-extension",
     "license": "MIT",
