@@ -5,6 +5,7 @@ Behat spawner extension
 [![License](https://poser.pugx.org/da-eto-ya/behat-spawner-extension/license.png)](https://packagist.org/packages/da-eto-ya/behat-spawner-extension)
 [![Build Status](https://travis-ci.org/da-eto-ya/behat-spawner-extension.svg?branch=master)](https://travis-ci.org/da-eto-ya/behat-spawner-extension)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/da-eto-ya/behat-spawner-extension/badges/quality-score.png?s=aa4d3b23969f9e7e838fe29237b8c4ac20c653cf)](https://scrutinizer-ci.com/g/da-eto-ya/behat-spawner-extension/)
+[![Total Downloads](https://poser.pugx.org/da-eto-ya/behat-spawner-extension/downloads.png)](https://packagist.org/packages/da-eto-ya/behat-spawner-extension)
 
 Overview
 --------
