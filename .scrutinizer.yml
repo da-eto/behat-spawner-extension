@@ -11,15 +11,21 @@ tools:
         enabled: true
         filter:
             excluded_paths: [vendor/*, bin/*, spec/*]
-    php_pdepend: true
+    php_pdepend:
+        enabled: true
+        excluded_dirs: [bin, spec]
+        filter:
+            excluded_paths: [vendor/*, bin/*, spec/*]
     php_cpd:
         enabled: true
         excluded_dirs: [vendor, bin, spec]
-    php_sim: true
+        filter:
+            excluded_paths: [vendor/*, bin/*, spec/*]
     php_analyzer:
         enabled: true
         filter:
             excluded_paths: [vendor/*, bin/*, spec/*]
+    php_sim: true
     sensiolabs_security_checker: true
     php_changetracking: true
     php_hhvm: true
