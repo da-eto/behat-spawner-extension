@@ -70,6 +70,9 @@ class SuiteListener implements EventSubscriberInterface
         );
     }
 
+    /**
+     * @return array
+     */
     public function getCommands()
     {
         return $this->commands;
@@ -92,7 +95,7 @@ class SuiteListener implements EventSubscriberInterface
     }
 
     /**
-     * @return null
+     * @return string|null
      */
     public function getWorkingDirectory()
     {
@@ -121,9 +124,9 @@ class SuiteListener implements EventSubscriberInterface
     }
 
     /**
-     * @param $arguments
-     * @param $execPrefix
-     * @param $workingDirectory
+     * @param array  $arguments
+     * @param string $execPrefix
+     * @param string $workingDirectory
      *
      * @return \Symfony\Component\Process\Process
      */
