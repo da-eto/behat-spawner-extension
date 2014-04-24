@@ -28,7 +28,7 @@ class Extension implements ExtensionInterface
         $config['commands'] = isset($config['commands']) ? $config['commands'] : array();
         $config['work_dir'] = isset($config['work_dir']) ? $config['work_dir'] : null;
         $config['nix_prefix'] = isset($config['nix_prefix']) ? $config['nix_prefix'] : 'exec';
-        $config['win_prefix'] = isset($config['win_prefix']) ? $config['win_prefix'] : '';
+        $config['win_prefix'] = isset($config['win_prefix']) ? $config['win_prefix'] : '.';
         $config['sleep'] = isset($config['sleep']) ? $config['sleep'] : 0;
 
         $container->setParameter('behat.spawner.commands', $config['commands']);
@@ -53,7 +53,7 @@ class Extension implements ExtensionInterface
                     ->defaultValue('')
                 ->end()
                 ->scalarNode('work_dir')
-                    ->defaultNull()
+                    ->defaultValue('.')
                 ->end()
                 ->scalarNode('nix_prefix')
                     ->defaultValue('exec')
