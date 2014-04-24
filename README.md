@@ -57,7 +57,7 @@ default:
             commands:           # array-formatted command list
                 - [php, -S, localhost:8880, -t, web, web/index.php]
                 - ['./bin/phantomjs', '--webdriver=8643']
-            work_dir: ''        # by default, use current directory
+            work_dir: '.'       # by default, use current directory
             win_prefix: ''      # prefix commands on Windows (default: empty)
             nix_prefix: 'exec'  # prefix commands on *-nix (default: 'exec')
             sleep: 0            # sleep after spawn (in milliseconds, default 0)
@@ -76,6 +76,15 @@ And you can specify `sleep` option in milliseconds for pause between spawn
 processes and start process features (for example, if you should wait for
 spawned server to start). Pause will be only if you declare some commands,
 obviously.
+
+Changelog
+---------
+
+### v1.0.1
+- Fix bugs with configuration on Windows (default `work_dir` equals `'.'` now)
+
+### v1.0.0
+- Initial version
 
 TODO
 ----
