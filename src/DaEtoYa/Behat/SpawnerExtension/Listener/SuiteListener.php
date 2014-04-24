@@ -7,6 +7,7 @@ use Symfony\Component\Process\ProcessBuilder;
 
 class SuiteListener implements EventSubscriberInterface
 {
+    /** @var array */
     private $commands;
     /** @var string */
     private $winPrefix;
@@ -22,11 +23,11 @@ class SuiteListener implements EventSubscriberInterface
     /**
      * Construct listener
      *
-     * @param array  $commands         commands in array format
+     * @param array  $commands commands in array format
      * @param null   $workingDirectory working directory for commands
-     * @param string $nixPrefix        prefix for *nix-based OS, default "exec"
-     * @param string $winPrefix        prefix for Windows OS
-     * @param int    $sleep            sleep after spawn (in milliseconds)
+     * @param string $nixPrefix prefix for *nix-based OS, default "exec"
+     * @param string $winPrefix prefix for Windows OS
+     * @param int    $sleep sleep after spawn (in milliseconds)
      */
     public function __construct(
         $commands = array(),
@@ -107,19 +108,47 @@ class SuiteListener implements EventSubscriberInterface
      */
     public function spawnProcesses()
     {
-        if (!count($this->processes)) {
-            $workingDirectory = $this->workingDirectory ? $this->workingDirectory : "";
-            $execPrefix = defined('PHP_WINDOWS_VERSION_BUILD') ? $this->winPrefix : $this->nixPrefix;
-
-            foreach ($this->commands as $arguments) {
-                $process = $this->createProcess($arguments, $execPrefix, $workingDirectory);
-                $process->start();
-                $this->processes[] = $process;
-            }
+        if (count($this->processes)) {
+            return;
         }
 
-        if ($this->sleep && count($this->processes)) {
-            usleep(1000 * $this->sleep);
+        $workingDirectory = $this->getNormalizedWorkdir();
+        $execPrefix = $this->getPlatformPrefix();
+
+        foreach ($this->commands as $arguments) {
+            $process = $this->createProcess($arguments, $execPrefix, $workingDirectory);
+            $process->start();
+            $this->processes[] = $process;
+        }
+
+        $this->sleepIfSpawned();
+    }
+
+    /**
+     * Normalize working dir (set to '.' if empty)
+     *
+     * @return string
+     */
+    private function getNormalizedWorkdir()
+    {
+        if ($this->workingDirectory) {
+            return $this->workingDirectory;
+        } else {
+            return ".";
+        }
+    }
+
+    /**
+     * Get prefix based on current platform (Windows/*-nix)
+     *
+     * @return string
+     */
+    private function getPlatformPrefix()
+    {
+        if (defined('PHP_WINDOWS_VERSION_BUILD')) {
+            return $this->winPrefix;
+        } else {
+            return $this->nixPrefix;
         }
     }
 
@@ -141,6 +170,16 @@ class SuiteListener implements EventSubscriberInterface
         }
 
         return $builder->getProcess();
+    }
+
+    /**
+     * Sleep if processes has been spawned and sleep option configured
+     */
+    private function sleepIfSpawned()
+    {
+        if ($this->sleep > 0 && count($this->processes)) {
+            usleep(1000 * $this->sleep);
+        }
     }
 
     /**
