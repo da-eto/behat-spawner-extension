@@ -10,10 +10,19 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
 class Extension implements ExtensionInterface
 {
+    /** @var array Default options for configuration */
+    private $defaultOptions = array(
+        'commands' => array(),
+        'work_dir' => '.',
+        'win_prefix' => '',
+        'nix_prefix' => 'exec',
+        'sleep' => 0,
+    );
+
     /**
      * Loads a specific configuration.
      *
-     * @param array            $config    Extension configuration hash (from behat.yml)
+     * @param array            $config Extension configuration hash (from behat.yml)
      * @param ContainerBuilder $container ContainerBuilder instance
      */
     public function load(array $config, ContainerBuilder $container)
@@ -25,11 +34,7 @@ class Extension implements ExtensionInterface
 
         $loader->load('services.yml');
 
-        $config['commands'] = isset($config['commands']) ? $config['commands'] : array();
-        $config['work_dir'] = isset($config['work_dir']) ? $config['work_dir'] : null;
-        $config['nix_prefix'] = isset($config['nix_prefix']) ? $config['nix_prefix'] : 'exec';
-        $config['win_prefix'] = isset($config['win_prefix']) ? $config['win_prefix'] : '.';
-        $config['sleep'] = isset($config['sleep']) ? $config['sleep'] : 0;
+        $config = array_merge($this->defaultOptions, $config);
 
         $container->setParameter('behat.spawner.commands', $config['commands']);
         $container->setParameter('behat.spawner.working_directory', $config['work_dir']);
@@ -50,16 +55,16 @@ class Extension implements ExtensionInterface
                 ->variableNode('commands')
                 ->end()
                 ->scalarNode('win_prefix')
-                    ->defaultValue('')
+                    ->defaultValue($this->defaultOptions['win_prefix'])
                 ->end()
                 ->scalarNode('work_dir')
-                    ->defaultValue('.')
+                    ->defaultValue($this->defaultOptions['work_dir'])
                 ->end()
                 ->scalarNode('nix_prefix')
-                    ->defaultValue('exec')
+                    ->defaultValue($this->defaultOptions['nix_prefix'])
                 ->end()
                 ->integerNode('sleep')
-                    ->defaultValue(0)
+                    ->defaultValue($this->defaultOptions['sleep'])
                 ->end()
             ->end();
     }
