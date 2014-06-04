@@ -2,7 +2,8 @@
 
 namespace DaEtoYa\Behat\SpawnerExtension;
 
-use Behat\Behat\Extension\ExtensionInterface;
+use Behat\Testwork\ServiceContainer\Extension as ExtensionInterface;
+use Behat\Testwork\ServiceContainer\ExtensionManager;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -22,10 +23,10 @@ class Extension implements ExtensionInterface
     /**
      * Loads a specific configuration.
      *
-     * @param array            $config Extension configuration hash (from behat.yml)
      * @param ContainerBuilder $container ContainerBuilder instance
+     * @param array            $config Extension configuration hash (from behat.yml)
      */
-    public function load(array $config, ContainerBuilder $container)
+    public function load(ContainerBuilder $container, array $config)
     {
         $loader = new YamlFileLoader(
             $container,
@@ -44,11 +45,46 @@ class Extension implements ExtensionInterface
     }
 
     /**
-     * Setups configuration for current extension.
+     * You can modify the container here before it is dumped to PHP code.
+     *
+     * @param ContainerBuilder $container
+     *
+     * @api
+     */
+    public function process(ContainerBuilder $container)
+    {
+    }
+
+    /**
+     * Returns the extension config key.
+     *
+     * @return string
+     */
+    public function getConfigKey()
+    {
+        return 'spawner';
+    }
+
+    /**
+     * Initializes other extensions.
+     *
+     * This method is called immediately after all extensions are activated but
+     * before any extension `configure()` method is called. This allows extensions
+     * to hook into the configuration of other extensions providing such an
+     * extension point.
+     *
+     * @param ExtensionManager $extensionManager
+     */
+    public function initialize(ExtensionManager $extensionManager)
+    {
+    }
+
+    /**
+     * Setups configuration for the extension.
      *
      * @param ArrayNodeDefinition $builder
      */
-    public function getConfig(ArrayNodeDefinition $builder)
+    public function configure(ArrayNodeDefinition $builder)
     {
         $builder
             ->children()
@@ -67,15 +103,5 @@ class Extension implements ExtensionInterface
                     ->defaultValue($this->defaultOptions['sleep'])
                 ->end()
             ->end();
-    }
-
-    /**
-     * Returns compiler passes used by this extension.
-     *
-     * @return array
-     */
-    public function getCompilerPasses()
-    {
-        return array();
     }
 }

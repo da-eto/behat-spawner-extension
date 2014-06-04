@@ -2,6 +2,7 @@
 
 namespace spec\DaEtoYa\Behat\SpawnerExtension\Listener;
 
+use Behat\Testwork\EventDispatcher\Event\SuiteTested;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -19,8 +20,8 @@ class SuiteListenerSpec extends ObjectBehavior
 
     function it_subscribes_to_beforeSuite_and_afterSuite_events()
     {
-        $this::getSubscribedEvents()->shouldHaveKey('beforeSuite');
-        $this::getSubscribedEvents()->shouldHaveKey('afterSuite');
+        $this::getSubscribedEvents()->shouldHaveKey(SuiteTested::BEFORE);
+        $this::getSubscribedEvents()->shouldHaveKey(SuiteTested::AFTER);
     }
 
     function it_assign_commands_on_construct()

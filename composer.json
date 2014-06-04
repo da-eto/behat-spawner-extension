@@ -16,7 +16,7 @@
 
     "require": {
         "php": ">=5.3.4",
-        "behat/behat": "~2.5",
+        "behat/behat": "~3.0",
         "symfony/process": ">=2.3.12"
     },
 

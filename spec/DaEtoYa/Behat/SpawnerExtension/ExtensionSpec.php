@@ -16,16 +16,11 @@ class ExtensionSpec extends ObjectBehavior
 
     function it_is_behat_extension()
     {
-        $this->shouldHaveType('Behat\Behat\Extension\ExtensionInterface');
-    }
-
-    function it_defines_no_compiler_passes()
-    {
-        $this->getCompilerPasses()->shouldHaveCount(0);
+        $this->shouldHaveType('Behat\Testwork\ServiceContainer\Extension');
     }
 
     function it_is_loadable(ContainerBuilder $container)
     {
-        $this->load(array(), $container)->shouldBe(null);
+        $this->load($container, array())->shouldBe(null);
     }
 }

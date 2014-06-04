@@ -2,6 +2,7 @@
 
 namespace DaEtoYa\Behat\SpawnerExtension\Listener;
 
+use Behat\Testwork\EventDispatcher\Event\SuiteTested;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Process\ProcessBuilder;
 
@@ -66,8 +67,8 @@ class SuiteListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            'beforeSuite' => array('spawnProcesses', -20),
-            'afterSuite' => array('stopProcesses', -20),
+            SuiteTested::BEFORE => array('spawnProcesses', -20),
+            SuiteTested::AFTER => array('stopProcesses', -20),
         );
     }
 
