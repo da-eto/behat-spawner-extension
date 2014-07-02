@@ -8,7 +8,6 @@ use Behat\Testwork\ServiceContainer\ExtensionManager;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Reference;
 
 class SpawnerExtension implements ExtensionInterface
 {
@@ -112,11 +111,11 @@ class SpawnerExtension implements ExtensionInterface
     {
         $definition = new Definition('Behat\SpawnerExtension\Listener\SuiteListener',
             array(
-                '%spawner.commands',
-                '%spawner.working_directory',
-                '%spawner.nix_prefix',
-                '%spawner.win_prefix',
-                '%spawner.sleep',
+                '%spawner.commands%',
+                '%spawner.working_directory%',
+                '%spawner.nix_prefix%',
+                '%spawner.win_prefix%',
+                '%spawner.sleep%',
             )
         );
         $definition->addTag(EventDispatcherExtension::SUBSCRIBER_TAG, array('priority' => 0));
