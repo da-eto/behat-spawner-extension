@@ -25,7 +25,7 @@ Define dependencies in your `composer.json`:
 {
     "require": {
         ...
-        "da-eto-ya/behat-spawner-extension": "1.0.*"
+        "da-eto-ya/behat-spawner-extension": "1.1.*@dev"
     }
 }
 ```
