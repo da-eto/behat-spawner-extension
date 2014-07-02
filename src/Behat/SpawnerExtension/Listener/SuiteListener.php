@@ -37,6 +37,7 @@ class SuiteListener implements EventSubscriberInterface
         $winPrefix = "",
         $sleep = 0
     ) {
+        var_dump('listener construct', $commands, $workingDirectory, $nixPrefix, $winPrefix, $sleep);
         $this->commands = $commands;
         $this->nixPrefix = $nixPrefix;
         $this->winPrefix = $winPrefix;
@@ -66,6 +67,7 @@ class SuiteListener implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
+        var_dump('getSubscribedEvents');
         return array(
             SuiteTested::BEFORE => array('spawnProcesses', -20),
             SuiteTested::AFTER => array('stopProcesses', -20),
@@ -77,6 +79,7 @@ class SuiteListener implements EventSubscriberInterface
      */
     public function getCommands()
     {
+        var_dump('getCommands');
         return $this->commands;
     }
 
@@ -85,6 +88,7 @@ class SuiteListener implements EventSubscriberInterface
      */
     public function getWinPrefix()
     {
+        var_dump('getWinPrefix');
         return $this->winPrefix;
     }
 
@@ -93,6 +97,7 @@ class SuiteListener implements EventSubscriberInterface
      */
     public function getNixPrefix()
     {
+        var_dump('getNixPrefix');
         return $this->nixPrefix;
     }
 
@@ -101,6 +106,7 @@ class SuiteListener implements EventSubscriberInterface
      */
     public function getWorkingDirectory()
     {
+        var_dump('getWorkingDirectory');
         return $this->workingDirectory;
     }
 
@@ -109,6 +115,7 @@ class SuiteListener implements EventSubscriberInterface
      */
     public function spawnProcesses()
     {
+        var_dump('spawnProcesses: start', $this->processes);
         if (count($this->processes)) {
             return;
         }
@@ -122,6 +129,7 @@ class SuiteListener implements EventSubscriberInterface
             $this->processes[] = $process;
         }
 
+        var_dump('spawnProcesses: before sleep', $this->processes);
         $this->sleepIfSpawned();
     }
 
@@ -162,6 +170,7 @@ class SuiteListener implements EventSubscriberInterface
      */
     private function createProcess($arguments, $execPrefix, $workingDirectory)
     {
+        var_dump('createProcess', $arguments, $execPrefix, $workingDirectory);
         $builder = new ProcessBuilder();
         $builder->setWorkingDirectory($workingDirectory);
         $builder->setPrefix($execPrefix);
@@ -178,6 +187,7 @@ class SuiteListener implements EventSubscriberInterface
      */
     private function sleepIfSpawned()
     {
+        var_dump('sleepIfSpawned');
         if ($this->sleep > 0 && count($this->processes)) {
             usleep(1000 * $this->sleep);
         }
@@ -188,6 +198,7 @@ class SuiteListener implements EventSubscriberInterface
      */
     public function stopProcesses()
     {
+        var_dump('stopProcesses');
         foreach ($this->processes as $process) {
             $process->stop();
         }
@@ -200,6 +211,7 @@ class SuiteListener implements EventSubscriberInterface
      */
     public function getProcesses()
     {
+        var_dump('getProcesses');
         return $this->processes;
     }
 
@@ -208,6 +220,7 @@ class SuiteListener implements EventSubscriberInterface
      */
     public function getSleep()
     {
+        var_dump('getSleep');
         return $this->sleep;
     }
 }
