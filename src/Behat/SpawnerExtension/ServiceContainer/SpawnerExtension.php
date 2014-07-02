@@ -103,11 +103,15 @@ class SpawnerExtension implements ExtensionInterface
             ->end();
     }
 
+    /**
+     * Loads main suite listener
+     * 
+     * @param ContainerBuilder $container
+     */
     private function loadSuiteListener(ContainerBuilder $container)
     {
         $definition = new Definition('Behat\SpawnerExtension\Listener\SuiteListener',
             array(
-                new Reference(self::SPAWNER_ID),
                 '%spawner.commands',
                 '%spawner.working_directory',
                 '%spawner.nix_prefix',
