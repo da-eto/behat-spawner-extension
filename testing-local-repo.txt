@@ -1,0 +1,1 @@
+file to testing local repo in composer (lib dev)
