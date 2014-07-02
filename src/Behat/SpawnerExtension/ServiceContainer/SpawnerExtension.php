@@ -35,11 +35,11 @@ class SpawnerExtension implements ExtensionInterface
 
         $config = array_merge($this->defaultOptions, $config);
 
-        $container->setParameter('behat.spawner.commands', $config['commands']);
-        $container->setParameter('behat.spawner.working_directory', $config['work_dir']);
-        $container->setParameter('behat.spawner.nix_prefix', $config['nix_prefix']);
-        $container->setParameter('behat.spawner.win_prefix', $config['win_prefix']);
-        $container->setParameter('behat.spawner.sleep', $config['sleep']);
+        $container->setParameter('spawner.commands', $config['commands']);
+        $container->setParameter('spawner.working_directory', $config['work_dir']);
+        $container->setParameter('spawner.nix_prefix', $config['nix_prefix']);
+        $container->setParameter('spawner.win_prefix', $config['win_prefix']);
+        $container->setParameter('spawner.sleep', $config['sleep']);
     }
 
     /**
