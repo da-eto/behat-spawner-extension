@@ -2,15 +2,18 @@
 
 namespace Behat\SpawnerExtension\ServiceContainer;
 
+use Behat\Testwork\EventDispatcher\ServiceContainer\EventDispatcherExtension;
 use Behat\Testwork\ServiceContainer\Extension as ExtensionInterface;
 use Behat\Testwork\ServiceContainer\ExtensionManager;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
-use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Reference;
 
 class SpawnerExtension implements ExtensionInterface
 {
+    const SPAWNER_ID = 'spawner';
+    
     /** @var array Default options for configuration */
     private $defaultOptions = array(
         'commands' => array(),
@@ -28,12 +31,7 @@ class SpawnerExtension implements ExtensionInterface
      */
     public function load(ContainerBuilder $container, array $config)
     {
-        $loader = new YamlFileLoader(
-            $container,
-            new FileLocator(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'services')
-        );
-
-        $loader->load('services.yml');
+        $this->loadSuiteListener($container);
 
         $config = array_merge($this->defaultOptions, $config);
 
@@ -103,5 +101,21 @@ class SpawnerExtension implements ExtensionInterface
                     ->defaultValue($this->defaultOptions['sleep'])
                 ->end()
             ->end();
+    }
+
+    private function loadSuiteListener(ContainerBuilder $container)
+    {
+        $definition = new Definition('Behat\SpawnerExtension\Listener\SuiteListener',
+            array(
+                new Reference(self::SPAWNER_ID),
+                '%spawner.commands',
+                '%spawner.working_directory',
+                '%spawner.nix_prefix',
+                '%spawner.win_prefix',
+                '%spawner.sleep',
+            )
+        );
+        $definition->addTag(EventDispatcherExtension::SUBSCRIBER_TAG, array('priority' => 0));
+        $container->setDefinition('spawner.listener.suite', $definition);
     }
 }
