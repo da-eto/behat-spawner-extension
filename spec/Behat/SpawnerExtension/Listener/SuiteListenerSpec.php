@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\DaEtoYa\Behat\SpawnerExtension\Listener;
+namespace spec\Behat\SpawnerExtension\Listener;
 
 use Behat\Testwork\EventDispatcher\Event\SuiteTested;
 use PhpSpec\ObjectBehavior;
@@ -10,7 +10,7 @@ class SuiteListenerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('DaEtoYa\Behat\SpawnerExtension\Listener\SuiteListener');
+        $this->shouldHaveType('Behat\SpawnerExtension\Listener\SuiteListener');
     }
 
     function it_is_event_subscriber()

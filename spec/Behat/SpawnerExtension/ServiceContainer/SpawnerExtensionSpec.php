@@ -1,17 +1,16 @@
 <?php
 
-namespace spec\DaEtoYa\Behat\SpawnerExtension;
+namespace spec\Behat\SpawnerExtension\ServiceContainer;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class ExtensionSpec extends ObjectBehavior
+class SpawnerExtensionSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('DaEtoYa\Behat\SpawnerExtension\Extension');
+        $this->shouldHaveType('Behat\SpawnerExtension\ServiceContainer\SpawnerExtension');
     }
 
     function it_is_behat_extension()
@@ -22,5 +21,10 @@ class ExtensionSpec extends ObjectBehavior
     function it_is_loadable(ContainerBuilder $container)
     {
         $this->load($container, array())->shouldBe(null);
+    }
+    
+    function it_is_named_spawner()
+    {
+        $this->getConfigKey()->shouldReturn('spawner');
     }
 }

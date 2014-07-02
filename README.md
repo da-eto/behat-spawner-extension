@@ -53,7 +53,7 @@ Activate and configure extension in your `behat.yml`:
 default:
     # ...
     extensions:
-        DaEtoYa\Behat\SpawnerExtension\Extension:
+        Behat\SpawnerExtension\ServiceContainer\SpawnerExtension:
             commands:           # array-formatted command list
                 - [php, -S, localhost:8880, -t, web, web/index.php]
                 - ['./bin/phantomjs', '--webdriver=8643']

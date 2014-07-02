@@ -1,6 +1,6 @@
 services:
     behat.spawner.suite_listener:
-        class: DaEtoYa\Behat\SpawnerExtension\Listener\SuiteListener
+        class: Behat\SpawnerExtension\Listener\SuiteListener
         arguments:
             - %behat.spawner.commands%
             - %behat.spawner.working_directory%

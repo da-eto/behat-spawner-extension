@@ -1,6 +1,6 @@
 <?php
 
-namespace DaEtoYa\Behat\SpawnerExtension;
+namespace Behat\SpawnerExtension\ServiceContainer;
 
 use Behat\Testwork\ServiceContainer\Extension as ExtensionInterface;
 use Behat\Testwork\ServiceContainer\ExtensionManager;
@@ -9,7 +9,7 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
-class Extension implements ExtensionInterface
+class SpawnerExtension implements ExtensionInterface
 {
     /** @var array Default options for configuration */
     private $defaultOptions = array(
@@ -30,7 +30,7 @@ class Extension implements ExtensionInterface
     {
         $loader = new YamlFileLoader(
             $container,
-            new FileLocator(__DIR__ . DIRECTORY_SEPARATOR . 'services')
+            new FileLocator(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'services')
         );
 
         $loader->load('services.yml');

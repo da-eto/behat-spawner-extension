@@ -1,6 +1,6 @@
 <?php
 
-namespace DaEtoYa\Behat\SpawnerExtension\Listener;
+namespace Behat\SpawnerExtension\Listener;
 
 use Behat\Testwork\EventDispatcher\Event\SuiteTested;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
