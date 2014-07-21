@@ -2,7 +2,7 @@
 
 namespace spec\Behat\SpawnerExtension\Listener;
 
-use Behat\Testwork\EventDispatcher\Event\SuiteTested;
+use Behat\Testwork\EventDispatcher\Event\ExerciseCompleted;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -20,8 +20,8 @@ class SuiteListenerSpec extends ObjectBehavior
 
     function it_subscribes_to_beforeSuite_and_afterSuite_events()
     {
-        $this::getSubscribedEvents()->shouldHaveKey(SuiteTested::BEFORE);
-        $this::getSubscribedEvents()->shouldHaveKey(SuiteTested::AFTER);
+        $this::getSubscribedEvents()->shouldHaveKey(ExerciseCompleted::BEFORE);
+        $this::getSubscribedEvents()->shouldHaveKey(ExerciseCompleted::AFTER);
     }
 
     function it_assign_commands_on_construct()

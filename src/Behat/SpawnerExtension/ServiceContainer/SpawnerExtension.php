@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\Definition;
 class SpawnerExtension implements ExtensionInterface
 {
     const SPAWNER_ID = 'spawner';
-    
+
     /** @var array Default options for configuration */
     private $defaultOptions = array(
         'commands' => array(),
@@ -104,12 +104,13 @@ class SpawnerExtension implements ExtensionInterface
 
     /**
      * Loads main suite listener
-     * 
+     *
      * @param ContainerBuilder $container
      */
     private function loadSuiteListener(ContainerBuilder $container)
     {
-        $definition = new Definition('Behat\SpawnerExtension\Listener\SuiteListener',
+        $definition = new Definition(
+            'Behat\SpawnerExtension\Listener\SuiteListener',
             array(
                 '%spawner.commands%',
                 '%spawner.working_directory%',
