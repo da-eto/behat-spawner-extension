@@ -1,7 +1,8 @@
 <?php
 
-namespace DaEtoYa\Behat\SpawnerExtension\Listener;
+namespace Behat\SpawnerExtension\Listener;
 
+use Behat\Testwork\EventDispatcher\Event\ExerciseCompleted;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Process\ProcessBuilder;
 
@@ -66,8 +67,8 @@ class SuiteListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            'beforeSuite' => array('spawnProcesses', -20),
-            'afterSuite' => array('stopProcesses', -20),
+            ExerciseCompleted::BEFORE => array('spawnProcesses', -20),
+            ExerciseCompleted::AFTER => array('stopProcesses', -20),
         );
     }
 

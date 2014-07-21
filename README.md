@@ -25,7 +25,7 @@ Define dependencies in your `composer.json`:
 {
     "require": {
         ...
-        "da-eto-ya/behat-spawner-extension": "1.0.*"
+        "da-eto-ya/behat-spawner-extension": "1.1.*@dev"
     }
 }
 ```
@@ -53,7 +53,7 @@ Activate and configure extension in your `behat.yml`:
 default:
     # ...
     extensions:
-        DaEtoYa\Behat\SpawnerExtension\Extension:
+        Behat\SpawnerExtension\ServiceContainer\SpawnerExtension:
             commands:           # array-formatted command list
                 - [php, -S, localhost:8880, -t, web, web/index.php]
                 - ['./bin/phantomjs', '--webdriver=8643']

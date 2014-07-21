@@ -1,7 +1,8 @@
 <?php
 
-namespace spec\DaEtoYa\Behat\SpawnerExtension\Listener;
+namespace spec\Behat\SpawnerExtension\Listener;
 
+use Behat\Testwork\EventDispatcher\Event\ExerciseCompleted;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -9,7 +10,7 @@ class SuiteListenerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('DaEtoYa\Behat\SpawnerExtension\Listener\SuiteListener');
+        $this->shouldHaveType('Behat\SpawnerExtension\Listener\SuiteListener');
     }
 
     function it_is_event_subscriber()
@@ -19,8 +20,8 @@ class SuiteListenerSpec extends ObjectBehavior
 
     function it_subscribes_to_beforeSuite_and_afterSuite_events()
     {
-        $this::getSubscribedEvents()->shouldHaveKey('beforeSuite');
-        $this::getSubscribedEvents()->shouldHaveKey('afterSuite');
+        $this::getSubscribedEvents()->shouldHaveKey(ExerciseCompleted::BEFORE);
+        $this::getSubscribedEvents()->shouldHaveKey(ExerciseCompleted::AFTER);
     }
 
     function it_assign_commands_on_construct()
