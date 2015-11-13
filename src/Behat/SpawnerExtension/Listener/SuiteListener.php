@@ -164,7 +164,10 @@ class SuiteListener implements EventSubscriberInterface
     {
         $builder = new ProcessBuilder();
         $builder->setWorkingDirectory($workingDirectory);
-        $builder->setPrefix($execPrefix);
+
+        if ($execPrefix) {
+            $builder->setPrefix($execPrefix);
+        }
 
         foreach ($arguments as $arg) {
             $builder->add($arg);
